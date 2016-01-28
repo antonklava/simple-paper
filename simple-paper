@@ -1,0 +1,89 @@
+#!/bin/bash
+
+print_usage() {
+	echo "Usage:"
+	echo "	`basename $0`                 # create pdf in current directory"
+	echo "	`basename $0` [PATH]          # create pdf from directory"
+	echo "	`basename $0` help            # show this message"
+	echo "	`basename $0` new [PAPERNAME] # create new paper"
+}
+
+new_boilerplate() {
+	PAPERNAME=$1
+	if [ -z "$PAPERNAME" ]; then
+		echo "Tried creating new paper from boilerplate but missing [PAPERNAME]!";
+		exit 1;
+	fi
+	mkdir $PAPERNAME
+	cd $PAPERNAME
+	curl -O https://raw.githubusercontent.com/antonklava/simple-paper/master/boilerplate.zip
+	unzip boilerplate.zip
+	rm -f boilerplate.zip
+}
+
+# Usage: extract_yml FILE KEY [default value]
+extract_yml() {
+	VAL=$(cat $1|grep $2|sed -e "s/^$2:[[:space:]]*//")
+	if [ -z "$VAL" ]; then
+		echo $3
+	else
+		echo $VAL
+	fi
+}
+
+if [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ "$1" == "help" ]; then
+	print_usage
+	exit 0
+fi
+
+if [ "$1" == "new" ]; then
+	new_boilerplate $2
+	exit 0
+fi
+
+ROOT=$(pwd)
+TARGET=$1
+if [ -z "$TARGET" ]; then
+	TARGET=$ROOT
+fi
+OUTPUT_DEFAULT=$(basename $TARGET)
+
+cd $TARGET
+if [ ! -f metadata.yml ]; then
+	echo "Could not find required $TARGET/metadata.yml."
+	exit 1;
+fi
+FILES=$(find . -name '*.md'|sort -g)
+OUTPUT=$(extract_yml metadata.yml output $OUTPUT_DEFAULT).pdf
+HIGHLIGHT=$(extract_yml metadata.yml highlight-style haddock)
+EXTENSIONS=(
+	+auto_identifiers
+	+citations
+	+fenced_code_attributes
+	+footnotes
+	+header_attributes
+	+implicit_figures
+	+inline_notes
+	+link_attributes
+	+shortcut_reference_links
+	+strikeout
+	+subscript
+	+superscript
+	+yaml_metadata_block
+)
+
+echo "Building $OUTPUT from"
+echo $FILES
+
+pandoc \
+	--from markdown_github$(echo ${EXTENSIONS[*]} |sed -e 's/ //g') \
+	--highlight-style $HIGHLIGHT \
+	--bibliography bibliography.bib \
+	--smart \
+	--standalone \
+	--output $ROOT/$OUTPUT \
+	metadata.yml \
+	$FILES
+
+echo "Done"
+

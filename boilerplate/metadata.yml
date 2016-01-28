@@ -1,0 +1,15 @@
+---
+title: Example document
+author:
+    - Anton Klava <anton@klava.se>
+date: 2016-01-01
+abstract: |
+    This is the abstract of your document
+keywords: [document, example]
+thanks:
+toc: true
+toc-depth: 2
+link-citations: true
+csl: elsevier-harvard.csl
+highlight-style: haddock
+---
