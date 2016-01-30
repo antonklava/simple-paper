@@ -46,9 +46,9 @@ TARGET=$1
 if [ -z "$TARGET" ]; then
 	TARGET=$ROOT
 fi
-OUTPUT_DEFAULT=$(basename $TARGET)
+OUTPUT_DEFAULT=$(basename "$TARGET")
 
-cd $TARGET
+cd "$TARGET"
 if [ ! -f metadata.yml ]; then
 	echo "Could not find required $TARGET/metadata.yml."
 	exit 1;
@@ -81,7 +81,7 @@ pandoc \
 	--bibliography bibliography.bib \
 	--smart \
 	--standalone \
-	--output $ROOT/$OUTPUT \
+	--output "$ROOT/$OUTPUT" \
 	metadata.yml \
 	$FILES
 
