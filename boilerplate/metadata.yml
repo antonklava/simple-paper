@@ -10,6 +10,6 @@ thanks:
 toc: true
 toc-depth: 2
 link-citations: true
-csl: elsevier-harvard.csl
+csl: ieee.csl
 highlight-style: haddock
 ---
