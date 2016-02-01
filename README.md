@@ -6,7 +6,8 @@ flexible, but that flexibility requires some configuration. simple-paper makes
 some assumptions about your configuration to let you start writing quickly.
 
 Most markdown extensions from pandoc are enabled and simple-paper should work
-fine for many academic papers. This includes:
+fine for many academic papers. Details can be found in the [Pandoc user
+guide](http://pandoc.org/README.html#pandocs-markdown). Extensions include:
 
 * BibTeX bibliography
 * Figures
@@ -18,7 +19,7 @@ fine for many academic papers. This includes:
 * Table of contents
 
 [boilerplate.pdf](boilerplate.pdf) was created using simple-paper, see
-[boilerplate/](boilerplate/) for source.
+[boilerplate/](boilerplate/1-introduction.md) for source.
 
 ## Installing and updating
 
