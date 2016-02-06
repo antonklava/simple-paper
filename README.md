@@ -28,7 +28,7 @@ To install you just need to paste the line below. It will download simple-paper
 to `/usr/local/bin/simple-paper` and make it executable.
 
 ```bash
-curl -O https://raw.githubusercontent.com/antonklava/simple-paper/master/simple-paper && mv simple-paper /usr/local/bin/ && chmod +x /usr/local/bin/simple-paper
+curl -O https://raw.githubusercontent.com/antonklava/simple-paper/master/simple-paper && sudo mv simple-paper /usr/local/bin/ && sudo chmod +x /usr/local/bin/simple-paper
 ```
 
 ## New paper
@@ -59,6 +59,9 @@ You need panodc and [Pandoc](http://pandoc.org/),
 [Pandoc-citeproc](https://github.com/jgm/pandoc-citeproc) and some latex engine
 installed.
 
+
+### OS X
+
 Assuming you have [Homebrew](http://brew.sh/), installing this on OS X can look
 like this:
 
@@ -70,6 +73,18 @@ brew cask install mactex
 
 You may have to update your `$PATH` to find the latex binaries (I had to add
 `/usr/local/texlive/2015/bin/x86_64-darwin`).
+
+### Debian/Ubuntu
+
+The full TeX install is huge (3GB) so make sure you dont run this on a too
+small vm. Apt will probably get you a pretty old version of pandoc so it's
+preferable to install from a .deb directly.
+
+```bash
+sudo apt-get install texlive-full
+curl -O https://github.com/jgm/pandoc/releases/download/1.16.0.2/pandoc-1.16.0.2-1-amd64.deb
+sudo dpkg -i pandoc-1.16.0.2-1-amd64.deb
+```
 
 ## Acknowledgements
 
