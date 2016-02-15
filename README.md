@@ -55,10 +55,10 @@ your files `1-introduction/1-abbreviations.md`,
 
 ## Prerequisits
 
-You need panodc and [Pandoc](http://pandoc.org/),
-[Pandoc-citeproc](https://github.com/jgm/pandoc-citeproc) and some latex engine
-installed.
-
+You need [Pandoc](http://pandoc.org/),
+[Pandoc-citeproc](https://github.com/jgm/pandoc-citeproc),
+[Pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) and some latex
+engine installed.
 
 ### OS X
 
@@ -67,7 +67,8 @@ like this:
 
 ```bash
 brew update
-brew install pandoc pandoc-citeproc
+brew install haskell-stack
+stack install pandoc pandoc-citeproc pandoc-crossref
 brew cask install mactex
 ```
 
@@ -78,14 +79,22 @@ You may have to update your `$PATH` to find the latex binaries (I had to add
 
 The full TeX install is huge (3GB) so make sure you dont run this on a too
 small vm. Apt will probably get you a pretty old version of pandoc so it's
-preferable to install from a .deb directly.
+preferable to install using stack. That will also let you get `pandoc-crossref`
+easily.
+
+Install Stack, the haskell package-manager from here:
+https://www.stackage.org/stack
 
 ```bash
 sudo apt-get install texlive-full
-curl -O https://github.com/jgm/pandoc/releases/download/1.16.0.2/pandoc-1.16.0.2-1-amd64.deb
-sudo dpkg -i pandoc-1.16.0.2-1-amd64.deb
+stack install pandoc pandoc-citeproc pandoc-crossref
 ```
 
 ## Acknowledgements
 
 Cat picture in boilerplate by Henry Riley, https://flic.kr/p/u98GdN
+
+## Changelog
+
+* 2016-02-15: Changed prerequisits, added `pandoc-crossref`.
+* 2016-02-01: Initial version

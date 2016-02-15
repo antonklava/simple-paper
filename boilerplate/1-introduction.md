@@ -12,13 +12,13 @@ Here is inline math \(1+1=2\) and a math block:
 \theta = 0
 \quad \Rightarrow \quad
 \sin^{2}\theta = 0
-\]
+\]{#eq:math-example}
 
 ## Code
 
 Here is a code block
 
-```{.ruby .numberLines}
+```{#lst:code-example .ruby .numberLines caption="Ruby code example"}
 array = %w(1 2 3)
 squared = array.map{|n| n*n}
 puts squared
@@ -28,8 +28,31 @@ puts squared
 
 Here is a figure
 
-![Ginger the Cat by Henry Riley](images/cat.jpg)
+![Ginger the Cat by Henry Riley](images/cat.jpg){#fig:cat}
 
-And here are some inline images
-![](images/cat.jpg){width=50% height=4cm} ![](images/cat.jpg){widht=50% height=4cm}
-![](images/cat.jpg){width=50% height=4cm} ![](images/cat.jpg){widht=50% height=4cm}
+## Table
+
+Create tables with captions like so:
+
+| a | b | c |
+|---|---|---|
+| 1 | 2 | 3 |
+| 4 | 5 | 6 |{#tbl:table-example}
+
+: Example table
+
+## Crossreferencing
+
+You can also reference math [@eq:math-example], code [@lst:code-example],
+figures [@fig:cat].
+
+## Lists
+
+_References_ is by default added in the `references.md` file. However you can
+also add a lists of figures, tables and/or listings.
+
+\listoffigures
+
+\listoftables
+
+\listoflistings

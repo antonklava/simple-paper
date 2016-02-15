@@ -59,17 +59,21 @@ HIGHLIGHT=$(extract_yml metadata.yml highlight-style haddock)
 EXTENSIONS=(
 	+auto_identifiers
 	+citations
+	+escaped_line_breaks
 	+fenced_code_attributes
 	+footnotes
 	+header_attributes
 	+implicit_figures
 	+inline_notes
 	+link_attributes
+	+raw_tex
 	+shortcut_reference_links
 	+strikeout
 	+subscript
 	+superscript
+	+table_captions
 	+yaml_metadata_block
+	-hard_line_breaks
 )
 
 echo "Building $OUTPUT from"
@@ -77,12 +81,14 @@ echo $FILES
 
 pandoc \
 	--from markdown_github$(echo ${EXTENSIONS[*]} |sed -e 's/ //g') \
+	--filter pandoc-crossref \
 	--highlight-style $HIGHLIGHT \
 	--bibliography bibliography.bib \
 	--smart \
+	--number-sections \
 	--standalone \
 	--output "$ROOT/$OUTPUT" \
-	metadata.yml \
+	./metadata.yml \
 	$FILES
 
 echo "Done"
